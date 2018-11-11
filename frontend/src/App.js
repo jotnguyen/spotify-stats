@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import MyNavbar from './components/MyNavbar'
+import Banner from './components/Banner'
+import Sidebar from './components/Sidebar'
+import Login from './components/Login'
 import axios from 'axios';
-import logo from './logo.svg';
-import './App.css';
+import TopSongs from './components/TopSongs'
 
 class App extends Component {
   constructor(props){
@@ -27,6 +29,7 @@ class App extends Component {
         hashParams[e[1]] = decodeURIComponent(e[2]);
         e = r.exec(q);
       }
+      window.location.hash = ""
       return hashParams
    }
    console.log("DIDNT RETURN HASH")
@@ -55,32 +58,15 @@ class App extends Component {
     })
     .catch(function (res) {
       console.log(res)
-    })
-      
+    }) 
   }
 
   render() {
     return (
-      // <div className="App">
-      //   <a href='http://localhost:8888/login' > Login to Spotify </a>
-      // </div>
-
-      <div className="Login">
-        <ButtonToolbar>
-          <Button bsStyle="primary" bsSize="large" href='http://localhost:8888/login'>
-            Login to Spotify
-          </Button>
-          <Button onClick={this.getTracks}>
-            Get your top tracks
-          </Button>
-        </ButtonToolbar>
-        {this.state.topTracks.map(track => {
-          return(
-          <p>{track.name}</p>
-          )
-        })}
-      </div>
-
+      <>
+            <MyNavbar></MyNavbar>
+            {this.state.params?<TopSongs token={this.state.params}/>:<Login/>}
+      </>
     );
   }
 }
