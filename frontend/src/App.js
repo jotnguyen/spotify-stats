@@ -63,10 +63,17 @@ class App extends Component {
 
   render() {
     return (
-      <>
+
+<div>
             <MyNavbar></MyNavbar>
-            {this.state.params?<TopSongs token={this.state.params}/>:<Login/>}
-      </>
+            <section  style={{backgroundImage: 'url(/images/giraffe-color-boxes.jpg', height: '500px'}}>
+              {this.state.params?<TopSongs token={this.state.params}/>:<Login token={this.state.params}/>}
+            </section>
+            <section style={{backgroundImage: 'radial-gradient(circle at center, red, green)', height: '800px'}}>
+              <p>test</p>
+            </section>
+</div>
+
     );
   }
 }
