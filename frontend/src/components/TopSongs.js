@@ -48,19 +48,23 @@ class TopSongs extends Component{
     }
     
     
-      
+    songCol = () => {
+            return(
 
-    songCard = () => {
+                this.state.topTracks.map(tracks => {
+                    return(
+                    <div class="col-md-4">
+                    {this.songCard(tracks)}
+                    </div>)
+            }))
+
+        
+    }      
+
+    songCard = (tracks) => {
         console.log("ahhh"+this.state.topTracks.length)
         let result = []
-        for(let i = 0; i < this.state.topTracks.length; i++){
-            console.log(i+"asdsas")
-            result.push(
-                <div card="card">
-                 <h5 class="card-title">{this.state.timeRange[i]}</h5>
-                </div>
-            )
-            result.push(this.state.topTracks[i].map( track => {
+            result.push(tracks.map( track => {
             return(
             <div class="card" key={track.uri}>
                 <div class="row">
@@ -74,14 +78,12 @@ class TopSongs extends Component{
                         </div>
                     </div>
                 </div>
-                
-
             </div>
             )
             }
             )
         )
-        }
+        
         return result
     }
 
@@ -93,9 +95,7 @@ class TopSongs extends Component{
         Get top tracks
         </button>
         <div class="row">
-        <div class="col">{this.songCard()}</div>
-        <div class="col">test</div>
-        <div class="col">test</div>
+            {this.songCol()}
         </div>
         </>
     );
